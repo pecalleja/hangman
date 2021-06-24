@@ -1,14 +1,25 @@
 # Write your code here
 import random
 print("H A N G M A N")
-print("Guess the word:")
-text = input()
 options = ['python', 'java', 'kotlin', 'javascript']
 winner = random.choice(options)
-hint = winner[:3]
-hidden = len(winner[3:])
-print(f"Guess the word {hint}{'-'* hidden}:")
-if text in winner:
-    print("You survived!")
-else:
-    print("You lost!")
+hidden = ["-"]*len(winner)
+res = {letter: [] for letter in winner}
+for idx, letter in enumerate(winner):
+    res[letter].append(idx)
+for i in range(8):
+    print()
+    print("".join(hidden))
+    print("Input a letter:")
+    letter = input()
+    if letter in winner:
+        indexes = res[letter]
+        for idx in indexes:
+            hidden[idx] = letter
+    else:
+        print("That letter doesn't appear in the word")
+
+print("""
+Thanks for playing!
+We'll see how well you did in the next stage
+""")
